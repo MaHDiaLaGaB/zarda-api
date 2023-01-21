@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict
 import math
 
 
@@ -18,7 +18,7 @@ class Zarda:
         cost = self.total / self.num_users
         return cost
 
-    def spent_each(self, user: str, cost: float) -> None:
+    def spent_each(self, user: str, cost: float) -> Dict:
         payment = dict()
         own = self.users[user] - cost
         if math.copysign(1, own) == -1:
@@ -29,4 +29,5 @@ class Zarda:
             payment[user] = f"you are free"
         else:
             payment[user] = f"receive {own:.2f}"
+        return payment
 

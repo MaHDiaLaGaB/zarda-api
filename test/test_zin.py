@@ -1,29 +1,29 @@
-import pytest
-from zarda.zin import Zarda
-
-TOTAL = 1390
-NUM_USERS = 5
-USERS = {"mad": 277, "max": 300, "john": 400, "fox": 121}
+from .constants import USERS, TOTAL, NUM_USERS
 
 
-@pytest.fixture
-def zarda_fixture():
-    return Zarda(TOTAL, NUM_USERS)
+def test_add(zarda):
+    zarda.add_users("jack", 340)
+    assert zarda.users["jack"] == 340
+
+    zarda.delete_user("jack")
+    assert zarda.users == {}
 
 
-def test_add(zarda_fixture):
-    zarda_fixture.add_users("jack", 340)
-    assert zarda_fixture.users["jack"] == 340
-
-    zarda_fixture.delete_user("jack")
-    assert zarda_fixture.users == {}
-
-
-def test_calculate_spending(zarda_fixture):
+def test_calculate_spending(zarda):
     x = TOTAL / NUM_USERS
-    assert zarda_fixture.calculate_spending() == x
+    assert zarda.calculate_spending() == x
 
 
-def test_spend_each(zarda_fixture):
-    zarda_fixture.users.copy(USERS)
+def test_spend_each(zarda):
+    payments = dict()
+    for k, v in USERS.items():
+        zarda.add_users(k, v)
+        payments.update(zarda.spent_each(k, zarda.calculate_spending()))
+    print(payments)
+    assert len(payments) == 5
+    assert payments["mad"] == "pay 1.00"
+
+
+
+
 
