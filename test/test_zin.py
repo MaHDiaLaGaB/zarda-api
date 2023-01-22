@@ -1,4 +1,4 @@
-from .constants import USERS, TOTAL, NUM_USERS
+from .constants import USERS, TOTAL, NUM_USERS, ACTUAL
 
 
 def test_add(zarda):
@@ -21,7 +21,9 @@ def test_spend_each(zarda):
         payments.update(zarda.spent_each(k, zarda.calculate_spending()))
     print(payments)
     assert len(payments) == 5
-    assert payments["mad"] == "pay 1.00"
+    for k, v in payments.items():
+        assert k in ACTUAL
+        assert ACTUAL[k] == v
 
 
 
