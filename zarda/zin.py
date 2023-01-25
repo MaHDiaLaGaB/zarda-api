@@ -3,8 +3,10 @@ import math
 
 
 class Zarda:
-    def __init__(self) -> None:
+    def __init__(self, zarda_name, num_users) -> None:
         self.users = dict()
+        self.zarda_name = zarda_name
+        self.num_users = num_users
 
     def add_users(self, user: str, spent: float) -> None:
         self.users[user] = spent
@@ -13,7 +15,7 @@ class Zarda:
         return sum(self.users.values())
 
     def calculate_spending(self) -> float:
-        cost = self.total_spent() / len(self.users)
+        cost = self.total_spent() / self.num_users
         return cost
 
     def spent_each(self, user: str, cost: float) -> Dict:
@@ -31,4 +33,3 @@ class Zarda:
 
     def delete_user(self, user: str) -> None:
         del self.users[user]
-

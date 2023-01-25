@@ -24,8 +24,3 @@ def test_spend_each(zarda):
     for k, v in payments.items():
         assert k in ACTUAL
         assert ACTUAL[k] == v
-
-
-
-
-

@@ -8,21 +8,9 @@ description = """
     other friends, it will split the invoice in the write way
     """
 
-app = FastAPI(title="ZardaAPI",
-              description=description,
-              version="0.0.1",
-              terms_of_service="not yet",
-              contact={
-                  "name": "MaHDi the Water",
-                  "url": "not yet",
-                  "email": "elmahdi.alagab@gmail.com",
-              },
-              license_info={
-                  "name": "MIT License",
-                  "url": "https://mit-license.org/",
-              }, docs_url="/")
+app = FastAPI(docs_url="/")
 
 app.include_router(users.router)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000, root_path="/")
+    uvicorn.run(app, host="0.0.0.0", port=8000)
