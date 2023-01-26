@@ -1,17 +1,25 @@
+from typing import Dict, Any
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy.ext.declarative import as_declarative, declared_attr
 
 
-class Base(declarative_base):
-    pass
+class_registry: Dict = {}
+
+
+@as_declarative(class_registry=class_registry)
+class Base:
+    id: Any
+    __name__: str
+
+    # Generate __tablename__ automatically
+    @declared_attr
+    def __tablename__(cls) -> str:
+        return cls.__name__.lower()
 
 
 class User(Base):
-    __tablename__ = "users"
     number_users = Column(Integer)
-
-    for i in range(number_users):
-        username = Column(String)
-
+    username = Column(String, primary_key=True)
     balance = Column(Float)
     zarda_name = Column(String)

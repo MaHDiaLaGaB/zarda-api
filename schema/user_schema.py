@@ -20,11 +20,11 @@ class User(ZardaBase):
 
 class UserDict(ZardaBase):
     users: Union[str, None] = None
-    num_users: int
 
 
 class ZardaName(ZardaBase):
-    Name: str
+    name: str
+    num_users: int
 
 
 class Health(ZardaBase):
