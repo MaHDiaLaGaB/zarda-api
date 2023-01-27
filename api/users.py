@@ -1,6 +1,9 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends
+
 from fastapi.exceptions import HTTPException
 from api import routes
+from sql.models import User
+from sqlalchemy.orm import Session
 from schema import Health, User, UserDict, ZardaName
 from zarda.zin import Zarda
 

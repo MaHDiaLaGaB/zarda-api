@@ -13,10 +13,10 @@ class DataBase:
             connect_args={"check_same_thread": False},
             echo=True,
         )
-        self._session_factory = sessionmaker(bind=self._engine)
+        self._session_factory = sessionmaker(autocommit=False, autoflush=False, bind=self._engine)
         self.db_session: Session = self._session_factory()
         self._engine.connect()
-        Base.metadata.create_all(self._engine)
+        Base.metadata.create_all(bind=self._engine)
 
     def session(self) -> Generator[int, None, None]:
         try:

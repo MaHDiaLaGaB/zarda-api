@@ -13,20 +13,27 @@ class ZardaBase(BaseModel):
         allow_inf_nan = False
 
 
-class User(ZardaBase):
+class ZardaBD(ZardaBase):
+    number_users = int
+    username = str
+    balance = float
+    zarda_name = str
+
+
+class User(BaseModel):
     name: str
     spent: float
 
 
-class UserDict(ZardaBase):
+class UserDict(BaseModel):
     users: Union[str, None] = None
 
 
-class ZardaName(ZardaBase):
+class ZardaName(BaseModel):
     name: str
     num_users: int
 
 
-class Health(ZardaBase):
+class Health(BaseModel):
     status: str
     description: str
